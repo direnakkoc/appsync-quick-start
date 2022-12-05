@@ -1,0 +1,40 @@
+schema{
+  query: Query
+  mutation: Mutation,
+  subscription: Subscription 
+}
+
+type Subscription {
+  onCreateBlog: Blog @aws_subscribe(mutations: ["createBlog"])
+}
+
+type Query {
+  getBlogById(blogId: ID!): Blog!
+  listBlogs(limit: Int!, nextToken: String): BlogsPage!
+}
+
+type BlogsPage {
+  blogs: [Blog]
+  nextToken: String
+}
+
+type Blog {
+  blogId: ID!
+  title: String!
+  description: String
+  imageUrl: AWSURL
+  author: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Mutation {
+  createBlog(newBlog: BlogInput): Blog! @aws_auth(cognito_groups: ["Admin"])
+}
+
+input BlogInput {
+  title: String!
+  description: String
+  imageUrl: AWSURL
+  author: String!
+}

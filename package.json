@@ -1,0 +1,22 @@
+{
+  "name": "appsync-quick-start",
+  "version": "2.1.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/direnakkoc/appsync-quick-start.git"
+  },
+  "author": "Diren",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/direnakkoc/appsync-quick-start/issues"
+  },
+  "homepage": "https://github.com/direnakkoc/appsync-quick-start#readme",
+  "devDependencies": {
+    "serverless-appsync-plugin": "^1.14.0"
+  }
+}

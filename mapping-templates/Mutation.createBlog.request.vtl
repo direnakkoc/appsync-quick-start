@@ -1,0 +1,15 @@
+{
+    "version" : "2018-05-29",
+    "operation" : "PutItem",
+    "key": {
+        "blogId" : $util.dynamodb.toDynamoDBJson($util.autoId())
+    },
+    "attributeValues" : {
+        "title" : $util.dynamodb.toDynamoDBJson($context.arguments.newBlog.title),
+        "description" : $util.dynamodb.toDynamoDBJson($context.arguments.newBlog.description),
+        "imageUrl" : $util.dynamodb.toDynamoDBJson($context.arguments.newBlog.imageUrl),
+        "author" : $util.dynamodb.toDynamoDBJson($context.arguments.newBlog.author),
+        "createdAt": $util.dynamodb.toDynamoDBJson($util.time.nowISO8601()),
+        "updatedAt": $util.dynamodb.toDynamoDBJson($util.time.nowISO8601())
+    }
+}
