@@ -8,7 +8,31 @@ plugins:
 
 custom:
   appSync:
-    - ${file(serverless.appsync-api.yml)}
+    - name: appsync-quick-start
+      schema: schema.api.graphql
+      authenticationType: AMAZON_COGNITO_USER_POOLS
+      userPoolConfig:
+        awsRegion: eu-west-1
+        defaultAction: ALLOW
+        userPoolId: !Ref CognitoUserPool
+      mappingTemplatesLocation: mapping-templates
+      mappingTemplates:
+        - type: Query
+          field: getBlogById
+          dataSource: blogsTable
+        - type: Query
+          field: listBlogs
+          dataSource: blogsTable
+        - type: Mutation
+          field: createBlog
+          dataSource: blogsTable
+
+dataSources:
+  - type: AMAZON_DYNAMODB
+    name: blogsTable
+    config:
+      tableName: !Ref BlogsTable
+
 
 provider:
   name: aws
