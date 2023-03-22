@@ -27,11 +27,11 @@ custom:
           field: createBlog
           dataSource: blogsTable
 
-dataSources:
-  - type: AMAZON_DYNAMODB
-    name: blogsTable
-    config:
-      tableName: !Ref BlogsTable
+      dataSources:
+        - type: AMAZON_DYNAMODB
+          name: blogsTable
+          config:
+            tableName: !Ref BlogsTable
 
 
 provider:
@@ -122,7 +122,10 @@ resources:
               Statement:
                 - Effect: "Allow"
                   Action:
-                    - "dynamodb:*"
+                    - "dynamodb:PutItem"
+                    - "dynamodb:GetItem"
+                    - "dynamodb:Query"
+                    - "dynamodb:BatchGetItem"
                   Resource:
                     - !GetAtt BlogsTable.Arn
         RoleName: "blogpost-admin-role"
